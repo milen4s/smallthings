@@ -1,2 +1,1115 @@
-# smallthings
-small things like these / workshop
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Magdalene Laundries — Ireland's Architecture of Containment</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f5efe3;
+    --parchment-dark: #ede3d0;
+    --ink: #1a1510;
+    --ink-soft: #3d3328;
+    --green-dark: #1e3a1e;
+    --green-mid: #2d5a2d;
+    --green-light: #4a7c4a;
+    --green-muted: #6b8f6b;
+    --gold: #8b6914;
+    --gold-light: #c4a44a;
+    --crimson: #7a1c1c;
+    --crimson-light: #a33030;
+    --grey: #6b6258;
+    --border: #c8b89a;
+    --nav-h: 56px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:'EB Garamond',serif;
+    font-size:18px;
+    line-height:1.75;
+  }
+
+  /* ───────────────────────────────────────
+     NAVIGATION BAR
+  ─────────────────────────────────────── */
+  .top-nav {
+    position:sticky; top:0; z-index:999;
+    background:var(--green-dark);
+    height:var(--nav-h);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 32px;
+    border-bottom:2px solid rgba(196,164,74,0.5);
+    box-shadow:0 2px 20px rgba(0,0,0,0.4);
+  }
+  .nav-title {
+    font-family:'EB Garamond',serif;
+    font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase;
+    color:#9a9080;
+  }
+  .nav-title em { color:var(--gold-light); font-style:normal; }
+
+  /* Dropdown wrapper */
+  .nav-menu { position:relative; }
+
+  .nav-btn {
+    background:none;
+    border:1px solid rgba(196,164,74,0.35);
+    color:var(--gold-light);
+    font-family:'EB Garamond',serif;
+    font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase;
+    padding:8px 18px; cursor:pointer;
+    display:flex; align-items:center; gap:10px;
+    transition:background 0.18s, border-color 0.18s;
+    user-select:none;
+  }
+  .nav-btn:hover { background:rgba(196,164,74,0.1); border-color:var(--gold-light); }
+  .nav-btn .arrow {
+    width:0; height:0;
+    border-left:4px solid transparent;
+    border-right:4px solid transparent;
+    border-top:5px solid var(--gold-light);
+    transition:transform 0.22s;
+    flex-shrink:0;
+  }
+  .nav-menu.open .nav-btn .arrow { transform:rotate(180deg); }
+
+  /* Dropdown panel */
+  .nav-dropdown {
+    position:absolute; right:0; top:calc(100% + 6px);
+    background:#0d1f0d;
+    border:1px solid rgba(196,164,74,0.25);
+    min-width:310px;
+    opacity:0; visibility:hidden;
+    transform:translateY(-8px);
+    transition:opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    box-shadow:0 14px 45px rgba(0,0,0,0.55);
+  }
+  .nav-menu:hover .nav-dropdown,
+  .nav-menu.open  .nav-dropdown {
+    opacity:1; visibility:visible; transform:translateY(0);
+  }
+  .nav-menu:hover .nav-btn .arrow { transform:rotate(180deg); }
+
+  .nav-dropdown-hdr {
+    padding:9px 20px 7px;
+    font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase;
+    color:#5a7a5a;
+    border-bottom:1px solid rgba(196,164,74,0.18);
+  }
+  .nav-dropdown a {
+    display:flex; align-items:baseline; gap:12px;
+    padding:10px 20px;
+    text-decoration:none; color:#b8b0a0;
+    font-family:'EB Garamond',serif; font-size:0.87rem;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+    transition:background 0.14s, color 0.14s;
+  }
+  .nav-dropdown a:last-child { border-bottom:none; }
+  .nav-dropdown a:hover { background:rgba(196,164,74,0.1); color:var(--gold-light); }
+  .nav-dropdown a .cn {
+    font-size:0.63rem; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--green-muted); min-width:56px; flex-shrink:0;
+  }
+  .nav-dropdown a:hover .cn { color:var(--gold-light); }
+
+  /* ───────────────────────────────────────
+     COVER
+  ─────────────────────────────────────── */
+  .cover {
+    background:var(--green-dark);
+    min-height:100vh;
+    display:flex; flex-direction:column;
+    justify-content:center; align-items:center;
+    text-align:center; padding:60px 40px;
+    position:relative; overflow:hidden;
+  }
+  .cover::before {
+    content:''; position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.015) 40px,rgba(255,255,255,0.015) 41px),
+      repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(255,255,255,0.015) 40px,rgba(255,255,255,0.015) 41px);
+  }
+  .cover-eyebrow {
+    font-size:0.75rem; letter-spacing:0.35em; text-transform:uppercase;
+    color:var(--gold-light); margin-bottom:40px; position:relative;
+  }
+  .cover-rule { width:80px; height:1px; background:var(--gold-light); margin:0 auto 40px; }
+  .cover h1 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.8rem,7vw,5.5rem); font-weight:900;
+    color:#f5efe3; line-height:1.05; margin-bottom:20px; max-width:800px; position:relative;
+  }
+  .cover h1 em { font-style:italic; color:var(--gold-light); }
+  .cover-sub {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(1.1rem,2.5vw,1.5rem); font-style:italic;
+    color:#c8bfad; max-width:600px; margin-bottom:50px; position:relative;
+  }
+  .cover-stat-row { display:flex; gap:60px; margin-top:50px; flex-wrap:wrap; justify-content:center; position:relative; }
+  .cover-stat { text-align:center; }
+  .cover-stat .num {
+    font-family:'Playfair Display',serif; font-size:2.8rem; font-weight:700;
+    color:var(--gold-light); display:block; line-height:1;
+  }
+  .cover-stat .label { font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:#9a907f; margin-top:6px; }
+  .cover-divider { width:1px; height:50px; background:#3a4f3a; align-self:center; }
+  .cover-meta { font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:#8a7f70; margin-top:60px; position:relative; }
+  .cover-cross { color:var(--gold-light); font-size:1.5rem; margin:0 12px; }
+
+  /* ───────────────────────────────────────
+     DOCUMENT LAYOUT
+  ─────────────────────────────────────── */
+  .document { max-width:860px; margin:0 auto; padding:0 30px; }
+
+  .chapter {
+    padding:80px 0 60px;
+    border-top:2px solid var(--green-dark);
+    margin-top:60px;
+    scroll-margin-top:calc(var(--nav-h) + 20px);
+  }
+  .chapter:first-child { border-top:none; margin-top:0; padding-top:80px; }
+
+  .ch-label {
+    font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase;
+    color:var(--green-muted);
+    display:flex; align-items:center; gap:15px; margin-bottom:18px;
+  }
+  .ch-label::after { content:''; flex:1; height:1px; background:var(--green-muted); opacity:0.35; }
+
+  h2 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.8rem,4vw,2.8rem); font-weight:700;
+    color:var(--green-dark); line-height:1.15; margin-bottom:30px;
+  }
+  h3 { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; color:var(--ink); margin:36px 0 14px; }
+  h4 {
+    font-family:'EB Garamond',serif; font-size:1rem; font-weight:600;
+    letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--green-mid); margin:28px 0 12px;
+  }
+  p { margin-bottom:1.2em; color:var(--ink-soft); }
+  p:last-child { margin-bottom:0; }
+
+  .intro-drop::first-letter {
+    font-family:'Playfair Display',serif; font-size:4.5rem; font-weight:900;
+    float:left; line-height:0.85; margin-right:8px; margin-top:4px; color:var(--green-dark);
+  }
+
+  .section-divider { display:flex; align-items:center; gap:16px; margin:20px 0 35px; }
+  .section-divider::before,.section-divider::after { content:''; flex:1; height:1px; background:var(--border); }
+  .section-divider span { color:var(--gold); font-size:1.2rem; }
+
+  /* ───────────────────────────────────────
+     PULLQUOTES & CALLOUTS
+  ─────────────────────────────────────── */
+  .pullquote {
+    border-left:4px solid var(--crimson); background:#f0e8d8;
+    padding:28px 32px; margin:40px 0; position:relative;
+  }
+  .pullquote::before {
+    content:'\201C'; font-family:'Playfair Display',serif;
+    font-size:5rem; color:var(--crimson); opacity:0.3;
+    position:absolute; top:-10px; left:18px; line-height:1;
+  }
+  .pullquote p { font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-style:italic; color:var(--crimson); line-height:1.6; margin-bottom:12px; }
+  .pullquote .attr { font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--grey); font-style:normal; }
+
+  .callout {
+    background:var(--green-dark); color:#e8e0cc;
+    padding:30px 35px; margin:40px 0; border-left:5px solid var(--gold-light);
+  }
+  .callout h4 { color:var(--gold-light); margin-top:0; }
+  .callout p { color:#c8c0ae; font-size:0.95rem; }
+
+  .callout-light { background:#ede3d0; border-left:4px solid var(--gold); padding:25px 30px; margin:35px 0; }
+  .callout-light h4 { color:var(--gold); margin-top:0; }
+
+  /* ───────────────────────────────────────
+     MAGDALENE TIMELINE (Ch 2)
+  ─────────────────────────────────────── */
+  .tl { position:relative; margin:50px 0; }
+  .tl::before {
+    content:''; position:absolute; left:100px; top:0; bottom:0; width:2px;
+    background:linear-gradient(to bottom,var(--green-dark),var(--green-muted),var(--crimson));
+  }
+  .tl-item { display:flex; align-items:flex-start; }
+  .tl-yr {
+    width:100px; flex-shrink:0; font-family:'Playfair Display',serif; font-weight:700; font-size:0.88rem;
+    color:var(--green-dark); padding:18px 20px 14px 0; text-align:right; line-height:1.2;
+  }
+  .tl-dot {
+    width:14px; height:14px; border-radius:50%; background:var(--green-dark); border:2px solid var(--parchment);
+    flex-shrink:0; margin-top:22px; margin-left:-6px; position:relative; z-index:1;
+  }
+  .tl-dot.r { background:var(--crimson); }
+  .tl-dot.g { background:var(--gold); }
+  .tl-body { padding:14px 0 14px 20px; flex:1; }
+  .tl-body strong { display:block; font-family:'Playfair Display',serif; font-size:0.98rem; color:var(--ink); margin-bottom:4px; }
+  .tl-body span { font-size:0.88rem; color:var(--grey); line-height:1.5; }
+  .tl-item + .tl-item .tl-body { border-top:1px solid rgba(100,90,70,0.13); padding-top:14px; }
+
+  /* ───────────────────────────────────────
+     IRELAND HISTORY INTERLUDE (dual-track)
+  ─────────────────────────────────────── */
+  .interlude {
+    background:var(--green-dark);
+    margin:0 -30px;
+    padding:70px 30px;
+    scroll-margin-top:calc(var(--nav-h) + 20px);
+  }
+  .interlude-inner { max-width:860px; margin:0 auto; }
+  .interlude .ch-label { color:rgba(196,164,74,0.7); }
+  .interlude .ch-label::after { background:rgba(196,164,74,0.25); opacity:1; }
+  .interlude h2 { color:#f0e8d8; }
+  .interlude > .interlude-inner > p { color:#9a9080; font-size:0.93rem; margin-bottom:40px; font-style:italic; }
+
+  /* column headers */
+  .dtl-headers {
+    display:grid; grid-template-columns:1fr 56px 1fr;
+    margin-bottom:4px;
+  }
+  .dtl-headers span {
+    font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold-light); opacity:0.65;
+    padding:0 20px 0 0; text-align:right;
+  }
+  .dtl-headers span:last-child { text-align:left; padding:0 0 0 20px; }
+
+  /* central spine */
+  .dtl { position:relative; }
+  .dtl::before {
+    content:''; position:absolute; left:50%; transform:translateX(-50%);
+    top:0; bottom:0; width:2px;
+    background:linear-gradient(to bottom,var(--gold-light) 0%,var(--green-muted) 55%,var(--crimson) 100%);
+  }
+
+  .dtl-row {
+    display:grid; grid-template-columns:1fr 56px 1fr;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+  }
+  .dtl-row.hi { background:rgba(196,164,74,0.055); border-bottom-color:rgba(196,164,74,0.12); }
+
+  .dtl-l, .dtl-r {
+    padding:16px 22px 16px 0; text-align:right;
+  }
+  .dtl-r { text-align:left; padding:16px 0 16px 22px; }
+  .dtl-l strong, .dtl-r strong {
+    display:block; font-family:'Playfair Display',serif; font-size:0.88rem;
+    color:#e8e0d0; margin-bottom:3px; line-height:1.25;
+  }
+  .dtl-l span, .dtl-r span { font-size:0.8rem; color:#7a7060; line-height:1.5; }
+  .dtl-l.blank, .dtl-r.blank { padding:0; }
+
+  .dtl-mid {
+    display:flex; flex-direction:column; align-items:center;
+    padding-top:18px; gap:4px; position:relative; z-index:2;
+  }
+  .dtl-dot {
+    width:13px; height:13px; border-radius:50%;
+    background:var(--gold-light); border:2px solid var(--green-dark); flex-shrink:0;
+  }
+  .dtl-dot.r { background:var(--crimson); }
+  .dtl-dot.g { background:var(--green-muted); }
+  .dtl-mid-yr {
+    font-family:'Playfair Display',serif; font-weight:700;
+    font-size:0.67rem; color:var(--gold-light); text-align:center;
+    line-height:1.2; white-space:nowrap;
+  }
+
+  @media(max-width:620px){
+    .dtl::before { display:none; }
+    .dtl-row { grid-template-columns:1fr; padding-left:14px; border-left:3px solid rgba(196,164,74,0.25); margin-bottom:4px; }
+    .dtl-mid { display:none; }
+    .dtl-l, .dtl-r { text-align:left; padding:8px 0; }
+    .dtl-l.blank { display:none; }
+    .dtl-headers { display:none; }
+    .interlude { margin:0 -20px; padding:50px 20px; }
+  }
+
+  /* ───────────────────────────────────────
+     STATS & CHARTS
+  ─────────────────────────────────────── */
+  .stat-grid {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(175px,1fr));
+    gap:2px; margin:40px 0; background:var(--border);
+  }
+  .stat-card { background:var(--parchment-dark); padding:26px 20px; text-align:center; }
+  .stat-card .big { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:900; color:var(--green-dark); display:block; line-height:1; margin-bottom:8px; }
+  .stat-card .lbl { font-size:0.77rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--grey); line-height:1.4; }
+
+  .bar-chart { background:var(--parchment-dark); padding:28px; margin:35px 0; border:1px solid var(--border); }
+  .bar-chart h4 { margin-top:0; color:var(--ink); letter-spacing:0.07em; }
+  .bar-row { display:flex; align-items:center; margin-bottom:11px; gap:12px; }
+  .bar-lbl { width:200px; flex-shrink:0; font-size:0.83rem; color:var(--ink-soft); text-align:right; line-height:1.3; }
+  .bar-track { flex:1; height:21px; background:rgba(0,0,0,0.06); overflow:hidden; }
+  .bar-fill { height:100%; background:var(--green-dark); }
+  .bar-fill.r { background:var(--crimson); }
+  .bar-fill.g { background:var(--gold); }
+  .bar-pct { font-size:0.78rem; color:var(--grey); width:42px; flex-shrink:0; }
+  .chart-note { font-size:0.77rem; color:var(--grey); font-style:italic; margin-top:10px; }
+
+  /* ───────────────────────────────────────
+     SURVIVOR CARDS
+  ─────────────────────────────────────── */
+  .survivor-card {
+    border:1px solid var(--border); background:#faf4ea;
+    margin:22px 0; padding:26px 30px; position:relative;
+  }
+  .survivor-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--crimson); }
+  .sv-name { font-family:'Playfair Display',serif; font-size:1.08rem; font-weight:700; color:var(--crimson); margin-bottom:3px; }
+  .sv-sub { font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--grey); margin-bottom:14px; }
+  .survivor-card blockquote {
+    font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-size:1.08rem; color:var(--ink-soft); line-height:1.65;
+    padding-left:16px; border-left:2px solid #c9b899;
+  }
+
+  /* ───────────────────────────────────────
+     STUDY CARDS (Ch8)
+  ─────────────────────────────────────── */
+  .study-grid { display:grid; grid-template-columns:1fr 1fr; gap:3px; background:var(--border); margin:35px 0; }
+  @media(max-width:580px){ .study-grid { grid-template-columns:1fr; } }
+  .study-card { background:#faf4ea; padding:24px 22px; }
+  .study-tag {
+    display:inline-block; font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase;
+    background:var(--green-dark); color:var(--gold-light); padding:2px 9px; margin-bottom:10px;
+  }
+  .study-card h4 { margin:0 0 10px; font-size:0.92rem; color:var(--ink); letter-spacing:0.04em; }
+  .study-card p { font-size:0.86rem; line-height:1.65; }
+  .study-finding {
+    display:flex; align-items:baseline; gap:10px;
+    padding:6px 0; border-bottom:1px solid rgba(100,90,70,0.12);
+    font-size:0.84rem; color:var(--ink-soft);
+  }
+  .study-finding:last-of-type { border-bottom:none; }
+  .study-finding strong { color:var(--crimson); font-weight:600; min-width:48px; font-family:'Playfair Display',serif; font-size:1.02rem; }
+
+  /* ───────────────────────────────────────
+     ORDERS GRID
+  ─────────────────────────────────────── */
+  .orders-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--border); margin:28px 0; }
+  .order-card { background:var(--parchment-dark); padding:20px; }
+  .order-card h4 { margin-top:0; font-size:0.78rem; }
+  .order-card p { font-size:0.86rem; }
+
+  /* ───────────────────────────────────────
+     KEEGAN SECTION
+  ─────────────────────────────────────── */
+  .keegan-hdr {
+    background:var(--green-dark); padding:50px 40px;
+    text-align:center; margin:0 -30px;
+    scroll-margin-top:calc(var(--nav-h) + 20px);
+  }
+  .keegan-hdr .eyebrow { font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold-light); margin-bottom:18px; }
+  .keegan-hdr h2 { color:#f5efe3; font-style:italic; margin-bottom:10px; }
+  .keegan-hdr .kauthor { color:#9a907f; font-size:0.88rem; letter-spacing:0.15em; text-transform:uppercase; }
+
+  .keegan-grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; margin:32px 0; }
+  @media(max-width:580px){ .keegan-grid { grid-template-columns:1fr; } }
+  .keegan-card { background:var(--parchment-dark); border-top:3px solid var(--green-mid); padding:22px 20px; }
+  .keegan-card h4 { margin-top:0; color:var(--green-dark); font-size:0.82rem; }
+  .keegan-card p { font-size:0.91rem; line-height:1.65; }
+
+  /* ───────────────────────────────────────
+     LISTS & TWO-COL
+  ─────────────────────────────────────── */
+  ul.styled { list-style:none; padding:0; margin:16px 0; }
+  ul.styled li {
+    padding:7px 0 7px 20px; border-bottom:1px solid rgba(100,90,70,0.14);
+    position:relative; font-size:0.94rem; color:var(--ink-soft);
+  }
+  ul.styled li::before { content:'◆'; position:absolute; left:0; color:var(--green-muted); font-size:0.48rem; top:13px; }
+
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin:22px 0; }
+  @media(max-width:560px){ .two-col { grid-template-columns:1fr; } }
+
+  /* ───────────────────────────────────────
+     FOOTER
+  ─────────────────────────────────────── */
+  .doc-footer {
+    background:var(--ink); color:#7a7060;
+    text-align:center; padding:50px 30px;
+    font-size:0.78rem; letter-spacing:0.07em; line-height:2.1; margin-top:80px;
+  }
+
+  @media(max-width:600px){
+    .tl::before { left:68px; }
+    .tl-yr { width:68px; font-size:0.76rem; }
+    .bar-lbl { width:120px; font-size:0.76rem; }
+    .cover-stat-row { gap:28px; }
+    .cover-divider { display:none; }
+    .keegan-hdr { margin:0 -20px; }
+    .document { padding:0 18px; }
+    .top-nav { padding:0 16px; }
+    .nav-title { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     NAVIGATION BAR
+════════════════════════════════════════ -->
+<nav class="top-nav">
+  <div class="nav-title">
+    <em>The Magdalene Laundries</em> &nbsp;·&nbsp; Ireland's Architecture of Containment
+  </div>
+
+  <div class="nav-menu" id="navMenu">
+    <button class="nav-btn" onclick="toggleNav()">
+      Chapters <span class="arrow"></span>
+    </button>
+    <div class="nav-dropdown">
+      <div class="nav-dropdown-hdr">Contents</div>
+      <a href="#ch1"><span class="cn">I ·</span>Origins &amp; Naming</a>
+      <a href="#ch2"><span class="cn">II ·</span>Timeline of Confinement</a>
+      <a href="#interlude"><span class="cn">✦ ·</span>Ireland's Century — Historical Context</a>
+      <a href="#ch3"><span class="cn">III ·</span>The State &amp; The Church</a>
+      <a href="#ch4"><span class="cn">IV ·</span>The Women — Who Were They?</a>
+      <a href="#ch5"><span class="cn">V ·</span>Life Behind Convent Walls</a>
+      <a href="#ch6"><span class="cn">VI ·</span>Silence, Society &amp; Complicity</a>
+      <a href="#ch7"><span class="cn">VII ·</span>The Celtic Tiger &amp; The Reckoning</a>
+      <a href="#ch8"><span class="cn">VIII ·</span>Survivor Voices &amp; Studies</a>
+      <a href="#ch9"><span class="cn">IX ·</span>Small Things Like These</a>
+      <a href="#ch10"><span class="cn">X ·</span>Legacy &amp; Further Reading</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════
+     COVER
+════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-eyebrow">A Historical Research Document</div>
+  <div class="cover-rule"></div>
+  <h1>The Magdalene <em>Laundries</em></h1>
+  <p class="cover-sub">Ireland's Architecture of Containment — Faith, Shame, Silence and the Women Who Were Erased</p>
+  <div class="cover-stat-row">
+    <div class="cover-stat"><span class="num">30,000+</span><span class="label">Women confined<br>1765–1996</span></div>
+    <div class="cover-divider"></div>
+    <div class="cover-stat"><span class="num">10</span><span class="label">Laundries in<br>independent Ireland</span></div>
+    <div class="cover-divider"></div>
+    <div class="cover-stat"><span class="num">231</span><span class="label">Years of<br>operation</span></div>
+    <div class="cover-divider"></div>
+    <div class="cover-stat"><span class="num">1996</span><span class="label">Last laundry<br>closed</span></div>
+  </div>
+  <div class="cover-meta">
+    Ireland <span class="cover-cross">✦</span> 1765–1996 <span class="cover-cross">✦</span> The Catholic Church &amp; The Irish State
+  </div>
+</div>
+
+<div class="document">
+
+<!-- ════════════════════════════════════════
+     CHAPTER 1 — ORIGINS
+════════════════════════════════════════ -->
+<div id="ch1" class="chapter">
+  <div class="ch-label">Chapter One ·· Origins &amp; Naming</div>
+  <h2>Why Magdalene? Why Laundries?</h2>
+  <div class="section-divider"><span>✦</span></div>
+
+  <p class="intro-drop">The name carries the entire weight of a theological judgement. Mary Magdalene — one of the most misunderstood figures in Christian history — was not, according to modern biblical scholarship, a prostitute. The gospels describe her as a woman from whom Jesus cast out seven demons, and as the first witness to the Resurrection. Yet for centuries, the Catholic Church conflated her with an unnamed "sinful woman" in Luke's Gospel, cementing the image of Magdalene as the archetypal repentant sinner — the fallen woman who washed Christ's feet with her tears.</p>
+
+  <p>This misreading was not accidental. In 591 AD, Pope Gregory I formally merged three separate biblical women into one composite figure of sexual sin and penitence, and it was this distorted Magdalene who gave her name to the institutions. The woman who lamented her sins and was redeemed became the patron saint of a system designed to contain, punish and erase women deemed morally impure.</p>
+
+  <div class="callout-light">
+    <h4>A Theological Error With Catastrophic Consequences</h4>
+    <p>Pope John Paul II formally rehabilitated Mary Magdalene's reputation in 1988, and in 2016 Pope Francis elevated her feast day to the level of an Apostle — acknowledging that the Church had been wrong for four centuries. By then, the Magdalene asylums had already confined and, in many cases, destroyed hundreds of thousands of lives across the Western world.</p>
+  </div>
+
+  <h3>Why Laundries?</h3>
+  <p>The choice of laundry work was neither accidental nor merely practical. It was deeply symbolic. Washing soiled linen was a literalisation of spiritual cleansing — the "fallen" women would scrub the dirt from the world's clothes as they, theoretically, scrubbed the sin from their souls. It was also, critically, <em>profitable</em>. The laundries took in commercial washing from hotels, hospitals, universities, schools, military barracks and government institutions. The "penitents" laboured without wages, making the convents financially self-sustaining and, in many periods, commercially profitable.</p>
+
+  <p>Hot, steam-filled laundry rooms — industrial mangles, vats of boiling water, heavy irons — were physically punishing environments. The women worked in near-total silence, forbidden to speak, stripped of their names, assigned numbers and drab uniforms. This was not incidental hardship. It was the architecture of a system designed to produce obedience and obliterate identity.</p>
+
+  <div class="pullquote">
+    <p>The cost of violence, oppression, and brutalization of women is enormous. The inmates suffered not only physically, but spiritually and emotionally.</p>
+    <span class="attr">— Andrea Parrot &amp; Nina Cummings, scholars of the Magdalene system</span>
+  </div>
+
+  <h3>Global Origins, Irish Specificity</h3>
+  <p>Magdalene asylums were not an Irish invention. The first recorded institution appeared in Hamburg in 1618. England established one in 1758, and the very first in Ireland — a Protestant institution on Lower Leeson Street in Dublin — opened in 1765, founded by Lady Arabella Denny. The first Catholic-run asylum in Ireland opened in 1798. What made Ireland distinctive was how long the institutions survived, how deeply they became embedded in the state, and how thoroughly they were insulated from scrutiny. While other countries largely wound down their Magdalene institutions by the mid-20th century, Ireland's last laundry did not close until <strong>1996</strong>.</p>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     CHAPTER 2 — MAGDALENE TIMELINE
+════════════════════════════════════════ -->
+<div id="ch2" class="chapter">
+  <div class="ch-label">Chapter Two ·· History at a Glance</div>
+  <h2>The Magdalene Timeline: Confinement &amp; Reckoning</h2>
+  <div class="section-divider"><span>✦</span></div>
+
+  <div class="tl">
+    <div class="tl-item"><div class="tl-yr">1765</div><div class="tl-dot"></div><div class="tl-body"><strong>First asylum in Ireland opens</strong><span>Lady Arabella Denny founds the Dublin Magdalen Asylum — Protestant, on Lower Leeson Street.</span></div></div>
+    <div class="tl-item"><div class="tl-yr">1798</div><div class="tl-dot"></div><div class="tl-body"><strong>First Catholic Magdalene asylum</strong><span>By the mid-19th century, Catholic religious orders dominate the system across Ireland.</span></div></div>
+    <div class="tl-item"><div class="tl-yr">1907</div><div class="tl-dot g"></div><div class="tl-body"><strong>Exempted from state inspection</strong><span>Irish nationalist politicians successfully exempt convent laundries from British labour and safety regulations. This exemption carries forward after independence.</span></div></div>
+    <div class="tl-item"><div class="tl-yr">1922</div><div class="tl-dot g"></div><div class="tl-body"><strong>Irish Free State established</strong><span>The new state forges a deep alliance with the Catholic Church. Education and social welfare are effectively ceded to religious orders. Ten Catholic Magdalene laundries operate under four congregations.</span></div></div>
+    <div class="tl-item"><div class="tl-yr">1936</div><div class="tl-dot g"></div><div class="tl-body"><strong>Conditions of Employment Act</strong><span>Specifically <em>exempts</em> nuns operating Magdalene laundries from labour regulations — including minimum wage and working hour limits. The women inside have zero legal protections.</span></div></div>
+    <div class="tl-item"><div class="tl-yr">1937</div><div class="tl-dot g"></div><div class="tl-body"><strong>Bunreacht na hÉireann</strong><span>New constitution gives the Church a "special position." Article 41.2 defines a woman's "life within the home" as the foundation of the common good. Divorce banned. Church-State symbiosis codified in law.</span></div></div>
+    <div class="tl-item"><div class="tl-yr">1950s–60s</div><div class="tl-dot"></div><div class="tl-body"><strong>Peak period of confinement</strong><span>Admissions at their highest. Courts, gardaí, families, priests, hospitals, and industrial schools all funnel women into the system.</span></div></div>
+    <div class="tl-item"><div class="tl-yr">1992–93</div><div class="tl-dot r"></div><div class="tl-body"><strong>The mass grave at Donnybrook</strong><span>Sisters of Our Lady of Charity sell land in Dublin. 155 bodies found where 133 were recorded; only 75 death certificates exist. Nuns cremate all remains and rebury them. Journalists expose the discrepancy. Ireland is shaken.</span></div></div>
+    <div class="tl-item"><div class="tl-yr">1996</div><div class="tl-dot r"></div><div class="tl-body"><strong>"Sex in a Cold Climate" + Final Closure</strong><span>Channel 4 documentary airs survivor testimonies for the first time. The last Irish Magdalene laundry at Seán McDermott Street, Dublin, closes in October.</span></div></div>
+    <div class="tl-item"><div class="tl-yr">1999</div><div class="tl-dot r"></div><div class="tl-body"><strong>"States of Fear" — Mary Raftery (RTÉ)</strong><span>Landmark three-part documentary series. Taoiseach Ahern issues a formal apology to industrial school survivors. Ryan Commission established.</span></div></div>
+    <div class="tl-item"><div class="tl-yr">2002</div><div class="tl-dot r"></div><div class="tl-body"><strong>"The Magdalene Sisters" — Peter Mullan</strong><span>Wins the Golden Lion at Venice. International attention. The Church condemns it. Survivors call it accurate.</span></div></div>
+    <div class="tl-item"><div class="tl-yr">2009</div><div class="tl-dot r"></div><div class="tl-body"><strong>Ryan Report published</strong><span>Documents decades of abuse across industrial schools and Church institutions. Magdalene survivors note the contrast: they received no equivalent survivor-led inquiry.</span></div></div>
+    <div class="tl-item"><div class="tl-yr">2013</div><div class="tl-dot r"></div><div class="tl-body"><strong>McAleese Report &amp; State Apology</strong><span>The Inter-Departmental Committee finds "significant" state collusion in the admission of over 11,000 women. Taoiseach Kenny delivers a formal apology. Compensation scheme established. Religious orders do not apologise and contribute nothing financially.</span></div></div>
+    <div class="tl-item"><div class="tl-yr">2022–26</div><div class="tl-dot g"></div><div class="tl-body"><strong>Ongoing — compensation and memory</strong><span>€32.8 million paid to 814 survivors by 2022. A 2026 review increased payments in 134 additional cases. National Memorial planned at Seán McDermott Street. Religious orders still refuse to participate.</span></div></div>
+  </div>
+</div>
+
+</div><!-- /document — close before interlude full-bleed -->
+
+
+<!-- ════════════════════════════════════════
+     INTERLUDE — IRELAND'S CENTURY (dual-track)
+════════════════════════════════════════ -->
+<div id="interlude" class="interlude">
+  <div class="interlude-inner">
+    <div class="ch-label">Historical Interlude ·· Context &amp; Connection</div>
+    <h2>Ireland's Century: A Parallel History</h2>
+    <p>The Magdalene story did not happen in isolation. It ran alongside — and was made possible by — a century of political transformation, social conservatism, economic crisis, and eventual cultural upheaval. The left column tracks Ireland's national events; the right tracks how Church, society, and women's lives were shaped in parallel.</p>
+
+    <div class="dtl-headers">
+      <span>Ireland — Nation &amp; Politics</span>
+      <span></span>
+      <span>Church · Society · Women</span>
+    </div>
+
+    <div class="dtl">
+
+      <div class="dtl-row hi">
+        <div class="dtl-l"><strong>1916 — Easter Rising</strong><span>Armed insurrection in Dublin declares Irish Republic. Leaders executed. Nationalist sentiment surges. The Catholic Church aligns with the Rising's cultural aims.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot"></div><div class="dtl-mid-yr">1916</div></div>
+        <div class="dtl-r"><strong>Moral Ireland taking shape</strong><span>The Rising ties Irish identity to Catholic morality. "Irish Ireland" becomes the ideological project — Gaelic, Catholic, pure.</span></div>
+      </div>
+
+      <div class="dtl-row">
+        <div class="dtl-l"><strong>1919–21 — War of Independence</strong><span>IRA guerrilla war against British forces. Ends with the Anglo-Irish Treaty (Dec. 1921). Ireland partitioned: 26 counties Free State, 6 counties Northern Ireland in the UK.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot g"></div><div class="dtl-mid-yr">1919–21</div></div>
+        <div class="dtl-r"><strong>Church legitimises the new state</strong><span>The Catholic hierarchy backs the Free State, giving it moral authority during the Civil War. Church-State alliance cemented. Education and welfare ceded to religious orders.</span></div>
+      </div>
+
+      <div class="dtl-row hi">
+        <div class="dtl-l"><strong>1922 — Irish Free State &amp; Civil War</strong><span>Free State established Dec. 6. Civil War erupts (1922–23) between pro- and anti-Treaty republicans. Michael Collins killed. De Valera in opposition.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot"></div><div class="dtl-mid-yr">1922</div></div>
+        <div class="dtl-r"><strong>10 Magdalene laundries operating</strong><span>A Ministry for the National Language handles Gaeltacht education. The Catholic Church manages all primary schools. De Valera's later cabinet appoints no Education Minister — none needed.</span></div>
+      </div>
+
+      <div class="dtl-row">
+        <div class="dtl-l"><strong>1929 — Censorship Board</strong><span>Publications deemed immoral are banned. Ireland becomes one of the world's most censored democracies. Beckett, O'Brien and many others face banning.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot g"></div><div class="dtl-mid-yr">1929</div></div>
+        <div class="dtl-r"><strong>Information suppressed</strong><span>Any discussion of sexuality, contraception, or "immoral" behaviour is censored. The silence that protects the laundries is institutionally enforced.</span></div>
+      </div>
+
+      <div class="dtl-row hi">
+        <div class="dtl-l"><strong>1937 — De Valera's Constitution</strong><span>New constitution entrenches Catholic social teaching. Divorce banned. Church given a "special position." Written in close consultation with Archbishop McQuaid.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot"></div><div class="dtl-mid-yr">1937</div></div>
+        <div class="dtl-r"><strong>Women legally defined by the home</strong><span>Article 41.2 declares a woman's place is in the home. Married women barred from civil service jobs (since 1932). Female identity legally constrained to wife and mother.</span></div>
+      </div>
+
+      <div class="dtl-row">
+        <div class="dtl-l"><strong>1939–45 — "The Emergency"</strong><span>Ireland remains neutral during WWII. Isolation deepens conservative culture. Economic stagnation intensifies dependence on the Church's social welfare infrastructure.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot g"></div><div class="dtl-mid-yr">1939–45</div></div>
+        <div class="dtl-r"><strong>Laundries at full capacity</strong><span>Wartime and postwar decades see the highest admissions. Unemployment and poverty drive families to commit daughters they cannot support.</span></div>
+      </div>
+
+      <div class="dtl-row">
+        <div class="dtl-l"><strong>1951 — Mother and Child Crisis</strong><span>Government health scheme for mothers and children blocked by the Catholic hierarchy. Minister Noël Browne resigns under Church pressure. Church authority over social policy is absolute.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot g"></div><div class="dtl-mid-yr">1951</div></div>
+        <div class="dtl-r"><strong>State submits to the Church</strong><span>The incident demonstrates that elected governments could be overridden by bishops on social policy. The women's welfare system — including the laundries — continues unquestioned.</span></div>
+      </div>
+
+      <div class="dtl-row">
+        <div class="dtl-l"><strong>1960s — Economic Opening</strong><span>Taoiseach Lemass and economist T.K. Whitaker open Ireland to foreign investment. Ireland joins the UN (1955) and applies to the EEC. Television arrives (1961).</span></div>
+        <div class="dtl-mid"><div class="dtl-dot g"></div><div class="dtl-mid-yr">1960s</div></div>
+        <div class="dtl-r"><strong>Second Vatican Council (1962–65)</strong><span>Vatican II modernises the Church globally — but Irish Catholicism stays far more conservative than the reforms suggest. The outside world enters Ireland's living rooms for the first time.</span></div>
+      </div>
+
+      <div class="dtl-row hi">
+        <div class="dtl-l"><strong>1968–98 — The Troubles</strong><span>Sectarian conflict in Northern Ireland. British army deployed. Bloody Sunday (1972): 14 civilians killed in Derry. Over 3,500 deaths across 30 years before the Good Friday Agreement.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot r"></div><div class="dtl-mid-yr">1968–98</div></div>
+        <div class="dtl-r"><strong>Southern Ireland looks inward</strong><span>The Troubles reinforce the Republic's anxiety about its own identity. The Church presents itself as guardian of a peaceful, moral southern state. Questioning it feels unpatriotic.</span></div>
+      </div>
+
+      <div class="dtl-row">
+        <div class="dtl-l"><strong>1973 — Ireland joins the EEC</strong><span>European Community membership begins Ireland's long economic and cultural integration with Europe. EU structural funds later fuel the Celtic Tiger.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot g"></div><div class="dtl-mid-yr">1973</div></div>
+        <div class="dtl-r"><strong>Women's liberation movement</strong><span>"Contraceptive train" protest: women travel to Belfast to buy contraceptives (illegal in the Republic) and return openly. The first cracks in the public consensus around women's rights.</span></div>
+      </div>
+
+      <div class="dtl-row">
+        <div class="dtl-l"><strong>1979 — Pope John Paul II visits</strong><span>One million people — a third of the population — attend mass in Phoenix Park. The Church appears at the zenith of its social power.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot g"></div><div class="dtl-mid-yr">1979</div></div>
+        <div class="dtl-r"><strong>Last laundries still operating</strong><span>The country that greets the Pope with a million-strong crowd is the same country still imprisoning women in convent washrooms. The contradiction is not yet visible to most.</span></div>
+      </div>
+
+      <div class="dtl-row hi">
+        <div class="dtl-l"><strong>1980s — Economic Crisis</strong><span>Unemployment reaches 17%. Over 200,000 people emigrate 1983–90. The state is effectively bankrupt. Austerity bites. A lost decade — Ireland's worst since the Famine.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot r"></div><div class="dtl-mid-yr">1980s</div></div>
+        <div class="dtl-r"><strong>Ann Lovett &amp; Kerry Babies (1984)</strong><span>Ann Lovett, 15, dies alone giving birth at a grotto in Granard. The Kerry Babies case exposes grotesque Garda treatment of a single mother. Public horror — but still no structural challenge to the Church.</span></div>
+      </div>
+
+      <div class="dtl-row">
+        <div class="dtl-l"><strong>1990 — Mary Robinson elected President</strong><span>First female President of Ireland. Transforms the presidency into a voice for human rights and marginalised groups. A landmark progressive moment.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot"></div><div class="dtl-mid-yr">1990</div></div>
+        <div class="dtl-r"><strong>Shift in women's public identity</strong><span>Robinson's election signals changing attitudes. The last Magdalene women are still working unpaid in convent laundries. The contrast between public and institutional Ireland could not be starker.</span></div>
+      </div>
+
+      <div class="dtl-row hi">
+        <div class="dtl-l"><strong>1992 — The X Case</strong><span>A 14-year-old rape victim is initially prevented by court injunction from travelling to England for an abortion. Public fury. A national reckoning with abortion law.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot r"></div><div class="dtl-mid-yr">1992</div></div>
+        <div class="dtl-r"><strong>Mass grave discovered — Donnybrook</strong><span>Sisters sell land; 155 bodies found in unmarked graves. Only 75 death certificates. The open secret of the laundries can no longer be contained.</span></div>
+      </div>
+
+      <div class="dtl-row">
+        <div class="dtl-l"><strong>1993 — Homosexuality decriminalised</strong><span>The last country in Western Europe to criminalise consensual same-sex relations finally ends the prohibition. Ireland's social liberalisation begins in earnest.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot g"></div><div class="dtl-mid-yr">1993</div></div>
+        <div class="dtl-r"><strong>Bishop Casey scandal</strong><span>Bishop Casey is revealed to have fathered a child and used Church funds to silence the mother. The scandal shatters the Church's moral authority. More revelations cascade.</span></div>
+      </div>
+
+      <div class="dtl-row hi">
+        <div class="dtl-l"><strong>1994–2008 — The Celtic Tiger</strong><span>Ireland's economic miracle. GDP growth 7–10% annually. Property boom. Emigration reversed; immigration begins. Ireland transforms from one of Europe's poorest to one of its wealthiest.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot"></div><div class="dtl-mid-yr">1994–08</div></div>
+        <div class="dtl-r"><strong>Secularisation accelerates; survivors speak</strong><span>Prosperity, consumerism, and European exposure erode deference to the Church. The conditions sustaining the laundries — poverty, emigration, fear, deference — begin to dissolve. Survivors start coming forward.</span></div>
+      </div>
+
+      <div class="dtl-row">
+        <div class="dtl-l"><strong>1998 — Good Friday Agreement</strong><span>Peace agreement ends most Troubles violence. Signed by British and Irish governments and Northern Ireland parties. Endorsed by referendum both North and South.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot"></div><div class="dtl-mid-yr">1998</div></div>
+        <div class="dtl-r"><strong>"States of Fear" (1999)</strong><span>Mary Raftery's definitive documentary reckoning. Survivors speak on national television. The full architecture of containment — schools, laundries, mother and baby homes — is exposed.</span></div>
+      </div>
+
+      <div class="dtl-row hi">
+        <div class="dtl-l"><strong>2008 — Financial Crash</strong><span>The Celtic Tiger collapses. Ireland requires an €85 billion IMF/EU bailout in 2010. The boom revealed as built on property speculation and reckless banking. Austerity returns.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot r"></div><div class="dtl-mid-yr">2008</div></div>
+        <div class="dtl-r"><strong>Murphy Report &amp; Ryan Report (2009)</strong><span>Murphy documents systematic cover-up of clerical abuse in Dublin Diocese. Ryan documents abuse across industrial schools for children. The Church's credibility is destroyed.</span></div>
+      </div>
+
+      <div class="dtl-row">
+        <div class="dtl-l"><strong>2013 — McAleese Report &amp; Apology</strong><span>State formally acknowledges its direct role in the Magdalene system. Taoiseach Kenny apologies in the Dáil. The religious orders refuse to participate in the compensation scheme.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot r"></div><div class="dtl-mid-yr">2013</div></div>
+        <div class="dtl-r"><strong>Survivors await justice</strong><span>Many survivors are elderly. Some have already died without receiving compensation or acknowledgement. JFM Research calls the scheme inadequate. The archives remain sealed.</span></div>
+      </div>
+
+      <div class="dtl-row">
+        <div class="dtl-l"><strong>2015 — Marriage Equality</strong><span>Ireland becomes the first country to legalise same-sex marriage by popular vote (62% in favour). A seismic cultural shift from the country that criminalised homosexuality in 1993.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot"></div><div class="dtl-mid-yr">2015</div></div>
+        <div class="dtl-r"><strong>A changed Ireland</strong><span>The same electorate that once sent women to convents in silence votes overwhelmingly for equality. The cultural transformation of Irish society is almost complete — on paper.</span></div>
+      </div>
+
+      <div class="dtl-row hi">
+        <div class="dtl-l"><strong>2018 — Eighth Amendment repealed</strong><span>Ireland votes 66% to remove the constitutional abortion ban — itself a product of the same 1937 Catholic constitution that codified women's domestic role. A direct reversal of the theocratic project.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot"></div><div class="dtl-mid-yr">2018</div></div>
+        <div class="dtl-r"><strong>Tuam mother-and-baby home</strong><span>Remains of up to 796 infants discovered in a septic tank at the Tuam home. Ireland confronts its institutional past layer by layer — each revelation deeper and more painful than the last.</span></div>
+      </div>
+
+      <div class="dtl-row">
+        <div class="dtl-l"><strong>2021 — Mother &amp; Baby Homes Report</strong><span>The Commission of Investigation documents the deaths of 9,000 children across 18 institutions and systematic cruelty toward unmarried mothers over decades. Another formal state apology.</span></div>
+        <div class="dtl-mid"><div class="dtl-dot r"></div><div class="dtl-mid-yr">2021</div></div>
+        <div class="dtl-r"><strong>The reckoning is incomplete</strong><span>Religious orders still control archives. Survivors are ageing and dying. The National Magdalene Memorial is not yet built. No criminal prosecutions. The unresolved past remains present.</span></div>
+      </div>
+
+    </div><!-- /dtl -->
+  </div><!-- /interlude-inner -->
+</div><!-- /interlude -->
+
+
+<div class="document">
+
+<!-- ════════════════════════════════════════
+     CHAPTER 3 — STATE & CHURCH
+════════════════════════════════════════ -->
+<div id="ch3" class="chapter">
+  <div class="ch-label">Chapter Three ·· The State &amp; The Church</div>
+  <h2>How Independence Became a Theocracy</h2>
+  <div class="section-divider"><span>✦</span></div>
+
+  <p class="intro-drop">When Ireland won its independence in 1922, the new Free State faced a defining question: what would it be? The answer, shaped by nationalist politicians deeply intertwined with the Catholic hierarchy, was resounding — it would be everything Britain was not. It would be Gaelic, it would be Catholic, and it would be morally pure. This ideological programme had catastrophic consequences for women.</p>
+
+  <h3>The Education Paradox — and the Irish Language</h3>
+  <p>The new state's priorities are revealed by what it chose to build first. The revolutionary government (1919–22) established a <strong>Ministry for the National Language</strong>, responsible for education in Irish-speaking Gaeltacht districts. When the Free State was proclaimed, language revival remained the central project. The 1922 National Programme Conference made Irish compulsory in all national schools within months of independence — infants were to be taught entirely through Irish.</p>
+
+  <div class="callout">
+    <h4>De Valera's Cabinet and the Missing Education Minister</h4>
+    <p>The Church's grip on schooling was so total that, when Éamon de Valera formed his first government in 1932, <strong>he did not even appoint a Minister for Education</strong>. There was no need — the Catholic Church managed all primary schools and the vast majority of secondary schools. The state paid teachers' salaries and over 95% of building costs but exercised almost no oversight of what happened inside Church-managed institutions. The Church's position was explicit and accepted: education of Catholic children must be "in Catholic schools, by Catholic teachers, under Catholic control."</p>
+  </div>
+
+  <h3>The 1937 Constitution</h3>
+  <p>De Valera's 1937 Constitution — Bunreacht na hÉireann — formalised what had been informal. The Catholic Church was given a "special position." Article 41.2 declared that a woman's "life within the home" provided "the common good," and that mothers should not be obliged "by economic necessity" to work outside it. Divorce was prohibited. Contraception had already been made illegal in 1935. The Constitution did not merely reflect Catholic social teaching — it <em>was</em> Catholic social teaching, written into law. Any woman who did not conform to the prescribed model of wife-and-mother within the bounds of marriage was, by definition, a problem to be contained.</p>
+
+  <h3>The Four Religious Orders</h3>
+  <div class="orders-grid">
+    <div class="order-card">
+      <h4>Sisters of Our Lady of Charity</h4>
+      <p>Operated Drumcondra and Seán McDermott Street, Dublin. Their 1992 land sale triggered the discovery of the mass grave that broke public silence.</p>
+    </div>
+    <div class="order-card">
+      <h4>Good Shepherd Sisters</h4>
+      <p>Operated Cork, Limerick, Waterford, and New Ross — the convent that inspired Keegan's <em>Small Things Like These</em>. Motto: "I will seek the one that is lost."</p>
+    </div>
+    <div class="order-card">
+      <h4>Sisters of Mercy</h4>
+      <p>Operated Galway and Dún Laoghaire. Also ran many of Ireland's industrial schools. When survivor Rose applied for her records, they sent back one ledger line: <em>"Penitent — twice."</em> Her two children were listed as offences.</p>
+    </div>
+    <div class="order-card">
+      <h4>Religious Sisters of Charity</h4>
+      <p>Operated Donnybrook and Cork. Classified as charitable works; operated as commercial enterprises with unpaid labour. State-funded for decades without inspection.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     CHAPTER 4 — THE WOMEN
+════════════════════════════════════════ -->
+<div id="ch4" class="chapter">
+  <div class="ch-label">Chapter Four ·· The Women</div>
+  <h2>Who Were They, and How Did They Get There?</h2>
+  <div class="section-divider"><span>✦</span></div>
+
+  <div class="stat-grid">
+    <div class="stat-card"><span class="big">11,000+</span><span class="lbl">Women admitted post-1922 (official minimum — two laundries had no records)</span></div>
+    <div class="stat-card"><span class="big">~30,000</span><span class="lbl">Total estimate across all Irish institutions, 19th–20th century</span></div>
+    <div class="stat-card"><span class="big">26%</span><span class="lbl">Of referrals directly made or facilitated by the Irish state</span></div>
+    <div class="stat-card"><span class="big">0</span><span class="lbl">Legal convictions required for indefinite detention</span></div>
+  </div>
+
+  <h3>Categories of Women Committed</h3>
+  <div class="bar-chart">
+    <h4>Reasons for Admission (McAleese Report &amp; Oral History Research)</h4>
+    <div class="bar-row"><div class="bar-lbl">Referred by family members</div><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div><div class="bar-pct">~72%</div></div>
+    <div class="bar-row"><div class="bar-lbl">Referred by state agencies (courts, gardaí, health boards)</div><div class="bar-track"><div class="bar-fill g" style="width:26%"></div></div><div class="bar-pct">~26%</div></div>
+    <div class="bar-row"><div class="bar-lbl">Transfer from industrial / reformatory schools</div><div class="bar-track"><div class="bar-fill" style="width:18%"></div></div><div class="bar-pct">~18%</div></div>
+    <div class="bar-row"><div class="bar-lbl">Transferred from mother-and-baby homes</div><div class="bar-track"><div class="bar-fill r" style="width:15%"></div></div><div class="bar-pct">~15%</div></div>
+    <div class="bar-row"><div class="bar-lbl">Referred by clergy</div><div class="bar-track"><div class="bar-fill" style="width:12%"></div></div><div class="bar-pct">~12%</div></div>
+    <p class="chart-note">Categories overlap. Figures are approximations. The religious orders have refused to open their archives, making precise figures impossible.</p>
+  </div>
+
+  <ul class="styled">
+    <li><strong>Unmarried mothers</strong> — transferred from mother-and-baby homes after their children were taken, or sent directly by families</li>
+    <li><strong>Rape and sexual abuse survivors</strong> — victims whose pregnancies or trauma were treated as evidence of their own immorality</li>
+    <li><strong>Orphans and girls from industrial schools</strong> — transferred automatically upon reaching a certain age, with nowhere else to go</li>
+    <li><strong>Women deemed "too pretty" or a "temptation"</strong> — girls referred by families who feared their attractiveness would cause dishonour</li>
+    <li><strong>Girls who disclosed abuse</strong> — like Maureen Sullivan, sent to the laundry after telling her teacher she was being sexually abused by her stepfather</li>
+    <li><strong>Women with intellectual disabilities</strong> — referred by hospitals or families as an alternative to other care</li>
+    <li><strong>Women separated from their husbands</strong> — whose marital "failure" marked them as deviant</li>
+    <li><strong>Poverty-stricken families' daughters</strong> — sometimes simply sent because the family could not afford to keep them</li>
+  </ul>
+
+  <div class="pullquote">
+    <p>They were usually given no information as to when or whether they would be released. Upon entry, their names were often changed and they were given an identification number. Many women recall being instructed not to speak about their home-place or family.</p>
+    <span class="attr">— Justice for Magdalenes Research, submission to the McAleese Committee</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     CHAPTER 5 — LIFE INSIDE
+════════════════════════════════════════ -->
+<div id="ch5" class="chapter">
+  <div class="ch-label">Chapter Five ·· Inside the Laundries</div>
+  <h2>Life Behind Convent Walls</h2>
+  <div class="section-divider"><span>✦</span></div>
+
+  <p>Once inside, women entered a world designed to strip them of identity and will. The regime was organised around three pillars: <strong>silence, labour, and penance</strong>.</p>
+
+  <h3>The Stripping of Identity</h3>
+  <p>A woman who entered a Magdalene laundry typically had her civilian clothes removed and replaced with a drab uniform. Her name was taken and she was given a new one — usually a saint's name — or simply referred to as a number or "child." She was forbidden from discussing her origins, her family, or her past. Contact with the outside world was restricted or denied entirely. Women were isolated in a separate section of the chapel during religious services, visibly marked as penitents even in the presence of God.</p>
+
+  <h3>The Work and Its Punishments</h3>
+  <p>The laundry work was physically brutal. Women stood for long hours over industrial washing machines, mangles, and ironing boards in rooms filled with steam. They handled enormous quantities of linen from hotels, hospitals, restaurants, and military barracks. Punishments for infractions — talking, showing emotion, attempting to escape — included verbal humiliation, physical beatings, denial of food, isolation, and having one's hair forcibly cut off.</p>
+
+  <div class="callout">
+    <h4>Food as a Mechanism of Control</h4>
+    <p>Oral histories reveal food was a constant instrument of power. Meals were monotonous and often inadequate — the same bland dishes repeated indefinitely. Former survivor Bridget cannot do laundry today without the steam triggering a return to the washroom. Mary cannot eat tapioca. Martina peeling a hardboiled egg brings the dining room flooding back. The sensory prison of the laundries followed women out of the walls for the rest of their lives.</p>
+  </div>
+
+  <p>When the United Nations Committee Against Torture examined the Irish Magdalene system in 2011, it stated that girls in the laundries were "deprived of their identity, of education and often of food and essential medicines and were imposed with an obligation of silence and prohibited from having any contact with the outside world." The UN urged Ireland to investigate whether the conditions amounted to torture.</p>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     CHAPTER 6 — SILENCE
+════════════════════════════════════════ -->
+<div id="ch6" class="chapter">
+  <div class="ch-label">Chapter Six ·· Silence, Society &amp; Complicity</div>
+  <h2>Did Ireland Know? The Architecture of Silence</h2>
+  <div class="section-divider"><span>✦</span></div>
+
+  <p class="intro-drop">This is the question that haunts Irish collective memory: did people know? The answer, uncomfortable but inescapable, is: <em>yes — and no</em>. The laundries were not secret in the way a conspiracy might be. They were present in the landscape. Their linen was in every hotel. Their existence was discussed in whispers. What the society maintained was not ignorance but something more subtle: a collective will not to know, not to speak, and most certainly not to protest.</p>
+
+  <h3>Why Didn't People Speak Out?</h3>
+  <ul class="styled">
+    <li><strong>The Church's moral authority was essentially total.</strong> To question the nuns was to question God — and in a society where the Church ran hospitals, schools, orphanages and social services, this was not a theoretical risk.</li>
+    <li><strong>Shame was weaponised.</strong> Families who had sent women to the laundries had a direct interest in keeping the secret. The shame used to commit women was the same shame that kept them silent upon release.</li>
+    <li><strong>Survivors were isolated.</strong> Women released from the laundries were often given no notice, no money, no support. Many moved to England immediately and never spoke of what had happened — even to their own children.</li>
+    <li><strong>Ostracism was real.</strong> Anyone who raised questions about the nuns risked being seen as immoral, antinational, and ungodly. The social cost was prohibitive.</li>
+    <li><strong>There were no legal mechanisms.</strong> Without a legal process for commitment, there was no legal process for challenge. Women had been removed from the world without trace; there was no paper trail to follow.</li>
+  </ul>
+
+  <h3>The 1980s — Cracks in the Dam</h3>
+  <p>Unemployment reached 17% in the 1980s. Over 200,000 people emigrated between 1983 and 1990. Yet the same crisis was fracturing the social consensus. The Kerry Babies case (1984) exposed the brutality of Ireland's treatment of women publicly. Ann Lovett's death (1984) — a 15-year-old who died giving birth alone at a grotto in Granard, Co. Longford — forced a terrified public to confront what happened to girls who became pregnant outside marriage. These individual tragedies were the cracks in the dam. The dam would finally break in the 1990s.</p>
+
+  <div class="pullquote">
+    <p>Ireland was a nation immersed in a conspiracy of silence since the last decades of the twentieth century concerning institutional abuse in which the clergy was involved.</p>
+    <span class="attr">— James Smith, coining "Ireland's Architecture of Containment," 2007</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     CHAPTER 7 — CELTIC TIGER
+════════════════════════════════════════ -->
+<div id="ch7" class="chapter">
+  <div class="ch-label">Chapter Seven ·· The Celtic Tiger &amp; The Reckoning</div>
+  <h2>How Everything Came to Light</h2>
+  <div class="section-divider"><span>✦</span></div>
+
+  <div class="callout-light">
+    <h4>What Was the Celtic Tiger?</h4>
+    <p>The term — first used in a 1994 Morgan Stanley report by Kevin Gardiner — described Ireland's extraordinary economic transformation from the mid-1990s to the late 2000s. Drawing on low corporate tax rates (12.5%), EU Structural Funds, a young educated workforce, and foreign direct investment, Ireland went from one of Western Europe's poorest countries to one of its wealthiest. GDP growth of 7–10% per year. Property prices soaring. A country that had bled emigrants for two centuries began attracting immigrants. The social consequences were as dramatic as the economic ones: secularisation accelerated, consumer culture displaced religious culture, and for the first time, significant numbers of Irish people were willing to challenge the Church's authority. The economic boom produced a cultural confidence — a willingness to critique the past — that had been impossible in a poorer, more frightened society.</p>
+  </div>
+
+  <h3>The 1992–93 Breaking Point</h3>
+  <p>The immediate trigger was a real-estate transaction. When the Sisters of Our Lady of Charity sold land at their High Park convent, they applied to exhume 133 bodies. The exhumation found <strong>155 bodies</strong>. Only 75 had death certificates. The nuns cremated all remains immediately and reburied them. When journalists realised that the identities of nearly half the dead women were simply unknown to the state — erased by the nuns — the story could no longer be contained.</p>
+
+  <h3>The Documentaries</h3>
+  <ul class="styled">
+    <li><strong>1996 — "Dear Daughter" (RTÉ):</strong> Exposed abuse at Goldenbridge industrial school. Shocked Ireland.</li>
+    <li><strong>1996 — "Sex in a Cold Climate" (Channel 4):</strong> The first documentary to feature Magdalene survivors' direct testimonies. Ireland's sexual repression put on trial.</li>
+    <li><strong>1999 — "States of Fear" (RTÉ/Mary Raftery):</strong> The most comprehensive reckoning. Taoiseach Ahern wept on camera and issued an apology to industrial school survivors.</li>
+    <li><strong>2002 — "The Magdalene Sisters" (Peter Mullan):</strong> Won the Golden Lion at Venice. The Church called it "a grotesque distortion." Survivors called it accurate.</li>
+  </ul>
+
+  <h3>The McAleese Report (2013)</h3>
+  <p>After years of lobbying by Justice for Magdalenes and a 2011 UN recommendation, the Irish government commissioned an Inter-Departmental Committee. Its central finding: the Irish state was significantly and directly involved in the admission of women to Magdalene laundries — through courts, gardaí, health boards, and state-funded institutions. Over 11,000 women documented. Taoiseach Kenny delivered a formal apology. The religious orders did not apologise. They have contributed nothing to the compensation scheme.</p>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     CHAPTER 8 — VOICES & STUDIES
+════════════════════════════════════════ -->
+<div id="ch8" class="chapter">
+  <div class="ch-label">Chapter Eight ·· Voices &amp; Studies</div>
+  <h2>Survivor Testimonies &amp; The Research Record</h2>
+  <div class="section-divider"><span>✦</span></div>
+
+  <p>Between 2009 and 2015, Justice for Magdalenes Research — alongside artist Evelyn Glynn and the Waterford Memories Project — collected testimonies producing roughly <strong>3,000 pages of transcripts</strong>. These are the voices that had been silenced for decades. The religious orders' archives remain closed to this day. For many of these women, these testimonies are the only record that their experience occurred at all.</p>
+
+  <!-- TESTIMONIES -->
+  <div class="survivor-card">
+    <div class="sv-name">Maureen Sullivan</div>
+    <div class="sv-sub">New Ross Magdalene Laundry, Co. Wexford · Entered aged 12 · Author of <em>Girl in the Tunnel</em> (2023)</div>
+    <blockquote>When I was twelve years old, I confided in my teacher that I was being physically and sexually abused by my stepfather. Never, in my darkest imaginings, could I have dreamt that I would be the one who would be sent away — to a place where no one would look for me. The girl who reported the crime was punished. The man who committed it was not.</blockquote>
+  </div>
+
+  <div class="survivor-card">
+    <div class="sv-name">Mary-Jo McDonagh</div>
+    <div class="sv-sub">Oral History Project — Justice for Magdalenes Research</div>
+    <blockquote>They told you nothing. Nothing about when you would leave, nothing about your family, nothing about the outside. You were no one. You had no name. I was a number. I forgot what my own name sounded like after a while. Years later, when someone called me by my name in the street, I stopped walking and couldn't understand why I was shaking.</blockquote>
+  </div>
+
+  <div class="survivor-card">
+    <div class="sv-name">Anonymous — "Bridget"</div>
+    <div class="sv-sub">Testimony published in academic research on food and power in the laundries (Williams, 2022)</div>
+    <blockquote>Every time I do laundry now — every time I open the machine and the steam comes out — I am back there. I am standing at the trough. I hear the silence. It never leaves you. People think because you leave, you are free. But you carry those walls with you.</blockquote>
+  </div>
+
+  <div class="survivor-card">
+    <div class="sv-name">"Rose" — her record from the Sisters of Mercy</div>
+    <div class="sv-sub">Galway Magdalene Laundry · Documented in Liverpool Irish Festival research, 2023</div>
+    <blockquote>When Rose applied for her records from the Sisters of Mercy, they sent back only a single line from a ledger. It stated that nuns from Tuam sent her to the Magdalene Laundry, and under cause: <em>"Penitent — twice."</em> Her two children were treated as offences. Nothing else. That was her life, reduced to a line in a ledger the nuns barely remembered keeping.</blockquote>
+  </div>
+
+  <div class="survivor-card">
+    <div class="sv-name">Anonymous — McAleese Committee testimony, 2012</div>
+    <div class="sv-sub">Identity protected</div>
+    <blockquote>My mother brought me there. She was afraid of what people would say if they saw me in the town. I wasn't bad. I wasn't a fallen woman. I was seventeen and I was pregnant. And my own mother handed me to the nuns and walked away. She was afraid of the neighbours. She was afraid of the priest. She was afraid of everything except what she was doing to me. I never fully forgave her. But I understand now. She was trapped too. We were all trapped.</blockquote>
+  </div>
+
+  <div class="survivor-card">
+    <div class="sv-name">A woman still living behind convent walls in 2013</div>
+    <div class="sv-sub">Documented at time of the McAleese Report</div>
+    <blockquote>When the McAleese Report was published, there were 58 Magdalene survivors still living in the "care" of the same nuns that ran the laundries — on the same grounds where they had been incarcerated. Judge Quirke noted that the nuns were worried that redress paid to these women might jeopardise their own state funding. One woman — born in Ireland's largest mother and baby institution, then forced to work in a Magdalene laundry most of her life — was still living behind the walls of a facility run by the same nuns that had failed health authority inspections.</blockquote>
+  </div>
+
+  <!-- STUDIES -->
+  <h3>What the Official Studies Found</h3>
+  <p>The testimonies above are the human face of what several major investigations documented in institutional language. Here is what the key studies established — and where they fell short.</p>
+
+  <div class="study-grid">
+    <div class="study-card">
+      <div class="study-tag">Official Inquiry · 2013</div>
+      <h4>McAleese Report — Key Findings</h4>
+      <div class="study-finding"><strong>11,000+</strong><span>Women admitted to laundries since 1922 (minimum figure — two laundries had no surviving records)</span></div>
+      <div class="study-finding"><strong>26%</strong><span>Of referrals directly made or facilitated by the Irish state (courts, gardaí, health boards)</span></div>
+      <div class="study-finding"><strong>58</strong><span>Survivors still living behind convent walls when the Report was published in February 2013</span></div>
+      <div class="study-finding"><strong>0</strong><span>Survivor testimonies incorporated into the main findings of the final report — the inquiry's greatest failing</span></div>
+      <p style="font-size:0.82rem; margin-top:14px; color:var(--grey); font-style:italic;">JFM Research submitted 795 pages of survivor testimony to the Committee. None appeared in the report's findings. Scholars have described the McAleese Report as an administrative document that minimised abuse and produced a "hierarchy of victimhood" — treating Magdalene survivors less seriously than industrial school victims.</p>
+    </div>
+
+    <div class="study-card">
+      <div class="study-tag">Official Inquiry · 2009</div>
+      <h4>Ryan Report — Child Abuse Commission</h4>
+      <div class="study-finding"><strong>2,600+</strong><span>Pages documenting abuse across industrial schools, reformatories, and residential Church institutions</span></div>
+      <div class="study-finding"><strong>9 years</strong><span>The Commission ran for nearly a decade, taking testimony from thousands of survivors — a stark contrast to the McAleese inquiry's 18-month administrative approach</span></div>
+      <div class="study-finding"><strong>Decade</strong><span>Of systematic physical and sexual abuse documented across Church institutions for children</span></div>
+      <p style="font-size:0.82rem; margin-top:14px; color:var(--grey); font-style:italic;">The Ryan Report was extensively survivor-led and widely accepted as credible. Scholars identify a disparity in how the two inquiries were conducted, reflecting a difference in how the state valued the testimony of children versus adult women whose moral status had been permanently tainted.</p>
+    </div>
+
+    <div class="study-card">
+      <div class="study-tag">Academic · 2007</div>
+      <h4>James M. Smith — "Architecture of Containment"</h4>
+      <div class="study-finding"><strong>Coined:</strong><span>The phrase "Ireland's Architecture of Containment" — now the defining academic framework for understanding institutional abuse in Ireland</span></div>
+      <div class="study-finding"><strong>Argued:</strong><span>The laundries were not aberrations but part of a deliberate, interconnected system of institutions — alongside industrial schools, mother-and-baby homes, and psychiatric hospitals — that made "troublesome" women and children literally invisible</span></div>
+    </div>
+
+    <div class="study-card">
+      <div class="study-tag">Academic · 2016</div>
+      <h4>Clara Fischer — "Gender, Nation &amp; the Politics of Shame"</h4>
+      <div class="study-finding"><strong>Core:</strong><span>The laundries were the direct product of tying Irish national identity to female purity — the legitimacy of the new state was built on the regulation of women's bodies</span></div>
+      <div class="study-finding"><strong>Consequence:</strong><span>Any woman who violated the prescribed model was, by definition, a threat to the nation itself — making her containment a patriotic act in the eyes of the system</span></div>
+      <p style="font-size:0.82rem; margin-top:14px; color:var(--grey); font-style:italic;">Fischer's framework is essential for understanding why the system survived so long with such broad social acceptance — it was not merely religious, but deeply political and nationalist.</p>
+    </div>
+
+    <div class="study-card">
+      <div class="study-tag">Compensation Scheme · 2014–2026</div>
+      <h4>Magdalen Restorative Justice Scheme</h4>
+      <div class="study-finding"><strong>€32.8M</strong><span>Paid to 814 survivors by 2022</span></div>
+      <div class="study-finding"><strong>134</strong><span>Additional cases received increased compensation after a 2026 Senior Counsel review</span></div>
+      <div class="study-finding"><strong>€0</strong><span>Contributed by the four religious orders that profited from women's unpaid labour for over 70 years</span></div>
+      <p style="font-size:0.82rem; margin-top:14px; color:var(--grey); font-style:italic;">Advocates describe the scheme as inadequate. Many women died before receiving anything. The orders have rejected all appeals — including from Ireland's Justice Minister — to contribute financially.</p>
+    </div>
+
+    <div class="study-card">
+      <div class="study-tag">Oral History · 2012–2015</div>
+      <h4>JFM Oral History Project</h4>
+      <div class="study-finding"><strong>~3,000</strong><span>Pages of survivor transcripts collected, processed, and archived</span></div>
+      <div class="study-finding"><strong>795</strong><span>Pages of survivor testimony submitted to the McAleese Committee — none incorporated into the final report</span></div>
+      <div class="study-finding"><strong>DRI</strong><span>Collection archived at the Digital Repository of Ireland for public and scholarly access</span></div>
+      <p style="font-size:0.82rem; margin-top:14px; color:var(--grey); font-style:italic;">Conducted under strict ethical guidelines; most testimonies are anonymised. One of the most important oral history collections in modern Irish history — and the primary reason we have any direct record of what these women experienced.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <h4>The Hierarchy of Victimhood</h4>
+    <p>Scholars have documented a troubling disparity in how the Irish state treated different categories of abuse survivors. Industrial school victims — primarily children — received a survivor-led, nine-year inquiry (Ryan Report, 2009) that ran to thousands of pages and is widely accepted as credible. Magdalene survivors received an 18-month administrative inquiry (McAleese Report, 2013) that excluded their testimonies from its findings, minimised the abuse, and was described by one academic as a "document of limited truth." The difference may reflect the different demographics: industrial school victims were children; Magdalene survivors were adult women whose moral status had been permanently tainted by the very system that abused them. Even in seeking justice, they were judged.</p>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     CHAPTER 9 — KEEGAN
+════════════════════════════════════════ -->
+<div id="ch9" class="chapter">
+  <div class="ch-label">Chapter Nine ·· Literature</div>
+  <div class="keegan-hdr">
+    <div class="eyebrow">Reading the History Through Literature</div>
+    <h2>Small Things Like These</h2>
+    <div class="kauthor">Claire Keegan — 2021</div>
+  </div>
+
+  <div style="height:48px"></div>
+
+  <p>Claire Keegan's novella — spare, devastating, and formally perfect — is one of the finest pieces of literary fiction to emerge from the Magdalene experience. At just over 100 pages, it achieves what volumes of reportage sometimes cannot: the rendering of moral complicity as a <em>felt</em> experience, something that happens in the body as much as in the mind. Reading it alongside the historical record illuminates both.</p>
+
+  <h3>Setting and Historical Accuracy</h3>
+  <p>The novel is set in <strong>New Ross, County Wexford, in 1985</strong>. New Ross was the location of a real Magdalene laundry operated by the Good Shepherd Sisters. The year 1985 places us in the depths of Ireland's economic crisis and the height of the Church's social authority — a decade before the reckoning would begin. Bill Furlong, a coal and timber merchant, discovers on Christmas Eve a young girl locked in the convent's fuel shed, barefoot, terrified, clearly imprisoned. He knows what it means. The town knows. The question the novel asks is whether knowing is enough.</p>
+
+  <div class="keegan-grid">
+    <div class="keegan-card">
+      <h4>◆ Why Christmas?</h4>
+      <p>Keegan sets the novella at Christmas with precision and purpose. Christmas is the feast of the Incarnation — the moment God becomes flesh, when the divine enters the world of the vulnerable. The irony is unbearable: a Catholic country celebrating the birth of Christ by imprisoning young women in a convent. The nativity story is itself the story of an unmarried woman who is pregnant — exactly the women the laundries imprisoned. The women in the coal shed are the anti-nativity. Christmas also structures the novel as a moment of decision before the world returns to normal.</p>
+    </div>
+    <div class="keegan-card">
+      <h4>◆ The Crows at the Convent</h4>
+      <p>Crows are a recurring presence — gathered in the convent grounds and in the bare winter trees. In Irish folk tradition, crows are associated with death and memory; they are harbingers and witnesses. At the convent, they are the witnesses the human community refuses to be — they watch, they gather, they do not intervene. The crows returning to a place mark the memory of what happened there. The novel ends, but the crows remain.</p>
+    </div>
+    <div class="keegan-card">
+      <h4>◆ Keegan's Language</h4>
+      <p>Keegan's prose is one of the most distinctive voices in contemporary Irish literature. The sentences are short, declarative, achingly precise. Nothing is excessive. The restraint of the language mirrors the restraint of the culture — a society that has learned not to speak, not to name, not to see. But in Keegan's hands, this restraint is not complicity; it is accusation. Every understated sentence becomes a kind of pressure. The white space on the page is the silence of the town around the convent. What is not said is the weight of what everyone knows and chooses not to say.</p>
+    </div>
+    <div class="keegan-card">
+      <h4>◆ Bill Furlong — Ordinary Moral Life</h4>
+      <p>Bill is not a hero. He is a decent, ordinary man, a father of five daughters, embedded in the town's social fabric. The novel is his moral test: will a man of conscience act when acting will cost him everything? It refuses easy heroism. It asks whether a single act of decency is enough when the system is vast. The reader recognises — uncomfortably — that Bill's hesitation is the hesitation of an entire society.</p>
+    </div>
+    <div class="keegan-card">
+      <h4>◆ Bill's Mother — The Road Not Taken</h4>
+      <p>Bill was born to an unmarried mother, protected by Mrs Wilson — a Protestant widow — rather than condemned. This is the counter-example to Catholic Ireland's response. Mrs Wilson did what the country did not do: offered shelter without judgement. Bill's entire moral formation stems from this one act of human decency. When he finds the girl in the coal shed, he recognises what is happening. He has seen what refuge looks like. He chooses, finally, to give it.</p>
+    </div>
+    <div class="keegan-card">
+      <h4>◆ The Title</h4>
+      <p>The title refers to the small moments of tenderness in ordinary life — a fire in the grate, a daughter's hair, the smell of woodsmoke. These "small things" constitute human dignity. The novel's argument is that dignity is made of small things — and that it is destroyed by the denial of exactly those things: a name, warmth, a word of kindness, the knowledge that someone sees you. The laundries destroyed every small thing, systematically. Bill's act is a small thing. The novella insists that small things are, in fact, everything.</p>
+    </div>
+  </div>
+
+  <div class="pullquote">
+    <p>Keegan's prose is an act of witness — doing in language what Bill Furlong does in the novel: looking directly at what the culture has trained everyone to look away from.</p>
+    <span class="attr">— On Keegan's literary method</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     CHAPTER 10 — LEGACY
+════════════════════════════════════════ -->
+<div id="ch10" class="chapter">
+  <div class="ch-label">Chapter Ten ·· Legacy &amp; Further Reading</div>
+  <h2>Studies, Key Works, and Unfinished Business</h2>
+  <div class="section-divider"><span>✦</span></div>
+
+  <h3>Key Academic and Journalistic Works</h3>
+  <ul class="styled">
+    <li><strong>James M. Smith</strong> — <em>Ireland's Magdalen Laundries and the Nation's Architecture of Containment</em> (2007, Notre Dame University Press). The foundational academic text.</li>
+    <li><strong>Frances Finnegan</strong> — <em>Do Penance or Perish</em> (2004). The first book-length history. Her dark observation: "Possibly the advent of the washing machine has been as instrumental in closing these laundries as have changing attitudes."</li>
+    <li><strong>Mary Raftery &amp; Eoin O'Sullivan</strong> — <em>Suffer the Little Children</em> (1999). Companion volume to "States of Fear."</li>
+    <li><strong>Justice for Magdalenes Research</strong> — Oral History Project (2013–2015). ~3,000 pages of survivor testimonies. Archived at the Digital Repository of Ireland.</li>
+    <li><strong>The McAleese Report</strong> (2013). Official state inquiry. Controversial for what it included — and, more importantly, for what it excluded.</li>
+    <li><strong>Clara Fischer</strong> — "Gender, Nation, and the Politics of Shame," <em>Signs</em> 41(4) (2016).</li>
+    <li><strong>Maureen Sullivan</strong> — <em>Girl in the Tunnel</em> (2023). The most recent major survivor memoir.</li>
+    <li><strong>Claire Keegan</strong> — <em>Small Things Like These</em> (2021, Faber). The definitive literary treatment.</li>
+  </ul>
+
+  <div class="callout">
+    <h4>What Remains Unresolved</h4>
+    <p>As of 2026, the religious orders have never issued an apology and have contributed nothing to the compensation scheme — despite receiving state funding for decades. Their archives remain closed to historians. Many women who died in the laundries lie in unmarked graves. A National Memorial at the Seán McDermott Street site is planned but not yet built. Justice for Magdalenes Research continues identifying the unidentified dead. The women who survived and never came forward are still out there — some elderly, some already gone. Their stories may never be collected.</p>
+  </div>
+
+  <h3>Ireland Today — And the Shadow of the Past</h3>
+  <p>Modern Ireland has changed almost beyond recognition from the country that sustained the Magdalene system. Same-sex marriage was legalised by referendum in 2015. The Eighth Amendment was repealed in 2018. The Mother and Baby Homes report was published in 2021. Yet historians and advocates argue that the reckoning is still incomplete. The structural conditions that allowed the abuse — the delegation of state functions to unaccountable religious bodies, the culture of deference to authority, the stigmatisation of women outside normative categories — require not just apology but active institutional transformation.</p>
+  <p>Ireland's past is not past. It lives in the women who survived. It lives in the unmarked graves. It lives, faintly but insistently, in the steam from an ordinary washing machine.</p>
+</div>
+
+</div><!-- /document -->
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<div class="doc-footer">
+  <p>Research compiled from: Britannica · McAleese Report (2013) · Justice for Magdalenes Research · Digital Repository of Ireland<br>
+  History.com · University of Galway · University of Liverpool · <em>Books &amp; Ideas</em> · Irish Times · RTÉ Brainstorm · Wikipedia</p>
+  <p style="margin-top:14px">For survivors and families:&nbsp; <strong>Justice for Magdalenes Research</strong> — magdalenelaundries.com</p>
+  <p style="margin-top:14px; color:#5a5048">This document was compiled as a research resource. The history of the Magdalene Laundries is living history — survivors are still seeking justice.</p>
+</div>
+
+<script>
+  function toggleNav() {
+    document.getElementById('navMenu').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-dropdown a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      document.getElementById('navMenu').classList.remove('open');
+    });
+  });
+  document.addEventListener('click', function(e) {
+    var menu = document.getElementById('navMenu');
+    if (!menu.contains(e.target)) menu.classList.remove('open');
+  });
+</script>
+
+</body>
+</html>
